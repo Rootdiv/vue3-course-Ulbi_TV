@@ -11,7 +11,7 @@
     </MyDialog>
     <PostList :posts="sortedAndSearchedPosts" @remove="removePost" v-if="!isPostsLoading" />
     <div v-else>Идёт загрузка...</div>
-    <!-- <div v-intersection="loadMorePosts" class="observer"></div> -->
+    <div v-intersection="loadMorePosts" class="observer"></div>
   </div>
 </template>
 
@@ -20,6 +20,7 @@
   import PostList from '@/components/PostList';
 
   import { usePosts } from '@/hooks/usePosts';
+  import { useMorePosts } from '@/hooks/useMorePosts';
   import useSortedPosts from '@/hooks/useSortedPosts';
   import useSortedAndSearchedPosts from '@/hooks/useSortedAndSearchedPosts';
 
@@ -52,12 +53,14 @@
     setup() {
       //console.log('props: ', props);
       const { posts, totalPages, isPostsLoading } = usePosts(10);
+      const { loadMorePosts } = useMorePosts(posts, totalPages, 10);
       const { sortedPosts, selectedSort } = useSortedPosts(posts);
       const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPosts(sortedPosts);
       return {
         posts,
         totalPages,
         isPostsLoading,
+        loadMorePosts,
         sortedPosts,
         selectedSort,
         searchQuery,

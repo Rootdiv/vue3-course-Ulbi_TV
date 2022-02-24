@@ -36,4 +36,7 @@
   .post__btns {
     display: flex;
   }
+  .btn:first-child {
+    margin: 0 15px;
+  }
 </style>

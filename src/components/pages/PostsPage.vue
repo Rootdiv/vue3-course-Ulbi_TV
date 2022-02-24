@@ -80,15 +80,17 @@
       },
       async loadMorePosts() {
         try {
-          this.page += 1;
-          const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
-            params: {
-              _page: this.page,
-              _limit: this.limit,
-            },
-          });
-          this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
-          this.posts = [...this.posts, ...response.data];
+          if (this.page < this.totalPages) {
+            this.page += 1;
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+              params: {
+                _page: this.page,
+                _limit: this.limit,
+              },
+            });
+            this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
+            this.posts = [...this.posts, ...response.data];
+          }
         } catch (error) {
           alert('Ошибка ' + error.message);
         }
