@@ -10,10 +10,6 @@
   </div>
 </template>
 
-<script>
-  export default {};
-</script>
-
 <style scoped>
   .navbar {
     background-color: #d3d3d3;
@@ -22,6 +18,7 @@
     align-items: center;
     padding: 15px;
   }
+
   .navbar__btns {
     display: flex;
     gap: 20px;
